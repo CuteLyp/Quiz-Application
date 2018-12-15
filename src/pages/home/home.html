@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Quiz Application
+    </ion-title>
+    <ion-buttons end>
+      <div >
+          
+      </div>
+      <button ion-button icon-only (click)="goToLoginpage()">
+        <ion-icon name="contact"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<!-- backspace -->
+
+<ion-content padding>
+  <ion-grid>
+  	<ion-row>
+      <ion-col>
+        <button ion-button full color = "danger" (click)="goToPrimarypage()">Primary Level</button><br><br>
+      </ion-col>
+      <ion-col>
+        <button ion-button full color = "waring" (click)="goToSecondarypage()">Secondary Level</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button full round color = "secondary" (click)="goToHighpage()">High Level</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button full round color = "light">Test</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button ion-button full round color = "danger" (click)="goToPrimarypage()">Primary Level</button>
+
+  <button ion-button full round color = "warning" (click)="goToSecondarypage()">Secondary Level</button>
+  <div padding>
+    <ion-segment [(ngModel)]="level">
+      <ion-segment-button value="Primary">
+        Primary
+      </ion-segment-button>
+      <ion-segment-button value="Secondary">
+        Secondary
+      </ion-segment-button>
+      <ion-segment-button value="High">
+        High
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="level">
+      <ion-list *ngSwitchCase="'Primary'" (click)="getPath(value)">
+        <ion-item>
+          <ion-label>Geography</ion-label>
+          <ion-segment-button value="Geography"></ion-segment-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>History</ion-label>
+          <ion-segment-button value="History"></ion-segment-button>
+        </ion-item>
+      </ion-list>
+      <ion-list *ngSwitchCase="'Secondary'">
+        <ion-label>test2</ion-label>
+      </ion-list>
+      <ion-list *ngSwitchCase="'High'">
+        <ion-label>test3</ion-label>
+      </ion-list>
+    </div>
+    <div>{{path}}</div>
+  </div>
+<div>
+  {{isAuthenticated == true ? login : logout}}
+</div>
+
+<div *ngIf="isAuthenticated==true">
+  <button ion-button (click)="signOut()">
+    <ion-icon name="close-circle"></ion-icon>
+  </button>
+</div>
+  
+  <!--
+  
+  
+  <div animates #animation="animates" text-center>
+    <button ion-button (click)="animation.start({type: 'rubberBand', duration: '1000'})">Click</button>
+  </div>
+  <button ion-button (click)="animateElem()">Animate it!</button>
+  <ion-card #myElement>
+    <ion-card-header>My Animation Card</ion-card-header>
+    <ion-card-content>So much awesome content and animations. AMAZING!</ion-card-content>
+  </ion-card>
+  <button ion-button (click)="toggleVisible()">Toggle</button>
+  <p [@myvisibility]="visibleState">
+    Test
+  </p>
+  -->
+</ion-content>
