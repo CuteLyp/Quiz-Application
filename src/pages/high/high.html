@@ -1,0 +1,118 @@
+<ion-header>
+
+  <ion-navbar hideBackButton>
+    <button ion-button (click)="quit()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-slides paper #slides>
+    <ion-slide>
+      <div *ngIf="randomQuestionList.length > 0; else loading">
+        <p><b>Note: Every question you only have 15 seconds!</b></p>
+        <button ion-button (click)="showNext()">
+          Start!
+        </button>
+      </div>
+    </ion-slide>
+  	<ion-slide *ngFor="let question of randomQuestionList; let i = index;">
+      <flash-card>
+        <div class="flash-card-front">
+          <img src="{{randomQuestionList[i].diagram}}" alt="" style="width: 80%; height:80%;">
+        </div>
+        <div class="flash-card-back">
+          <ion-label>{{randomQuestionList[i].question}}</ion-label>
+        </div>
+      </flash-card>
+      <ion-list no-lines radio-group [(ngModel)]="radioButtons" (ngModulChange)="collectAnswer(value)">
+        <ion-item>
+          <ion-radio hidden value="none"></ion-radio>
+        </ion-item>
+        <ion-item *ngFor="let z of randomAnswerArray">
+          <ion-label>{{randomQuestionList[i].answer["answer" + z]}}</ion-label>
+          <ion-radio [value]="randomQuestionList[i].answer['answer' + z]" name="randomQuestionList[i].answer['answer' + z]"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <button id="timeNode" ion-button full round icon-end (click)="refreshQuestion()">
+        Next
+      </button>
+    </ion-slide>
+    <ion-slide>
+      <p>Your score is {{marks}} marks</p>
+      <ion-col>
+        <button ion-button (click)="tryAgain()">
+          Try again ?
+        </button>
+        <button ion-button (click)="goToHomepage()">
+          Leave
+        </button>
+      </ion-col>
+    </ion-slide>
+  </ion-slides>
+  <ng-template #loading>Loading...</ng-template>
+</ion-content>
+
+<!--
+  <flash-card>
+  <div>
+  
+  </div>
+  <div>
+    
+  </div>
+</flash-card>
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>high</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-slides paper #slides>
+    <ion-slide>
+      <div *ngIf="randomQuestionList.length > 0; else loading">
+        <p><b>Note: Every question you only have 15 seconds!</b></p>
+        <button ion-button (click)="showNext()">
+          Start!
+        </button>
+      </div>
+    </ion-slide>
+    <ion-slide *ngFor="let question of randomQuestionList; let i = index;" >
+      <img src="{{randomQuestionList[i].diagram}}" alt="" style="width: 80%; height:80%;">
+      <ion-list radio-group [(ngModel)]="radioButtons" (ngModulChange)="collectAnswer(value)">
+        <ion-item>
+          <ion-radio hidden value="none"></ion-radio>
+        </ion-item>
+        <ion-item *ngFor="let z of randomAnswerArray">
+          <ion-label>{{randomQuestionList[i].answer["answer" + z]}}</ion-label>
+          <ion-radio [value]="randomQuestionList[i].answer['answer' + z]" name="randomQuestionList[i].answer['answer' + z]"></ion-radio>
+        </ion-item>
+      </ion-list>
+      <button id="timeNode" ion-button full round icon-end (click)="refreshQuestion()">
+        Next
+      </button>
+    </ion-slide>
+    <ion-slide>
+      <p>Your score is {{marks}} marks</p>
+      <ion-col>
+        <button ion-button (click)="tryAgain()">
+          Try again ?
+        </button>
+        <button ion-button (click)="goToHomepage()">
+          Leave
+        </button>
+      </ion-col>
+    </ion-slide>
+  </ion-slides>
+  <ng-template #loading>Loading...</ng-template>
+</ion-content>
+
+
+-->

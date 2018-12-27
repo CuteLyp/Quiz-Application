@@ -1,0 +1,82 @@
+<ion-header>
+  <!-- hideBackButton *navbar -->
+  <ion-navbar >
+    <button ion-button (click)="quit()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  </ion-navbar>
+    
+  
+</ion-header>
+<!--  *ngFor="let i of randomQuestionList" -->
+<!-- 
+
+-->
+<ion-content padding>
+  <div *ngIf="randomQuestionList.length > 0; else loading">
+    <ion-slides paper #slides>
+      <ion-slide>
+        <strong>Note: Every question you only have 15 seconds</strong>
+        <p>Question Format Test</p>
+        <button ion-button (click)="start()">
+          Start!
+        </button>
+      </ion-slide>
+      <ion-slide>
+        <ion-card #contentPage>
+          <ion-card-content>
+            <div><h1><strong>{{i+1}}. {{randomQuestionList[i].question}}</strong></h1></div>
+          </ion-card-content>
+          <p [@myvisibility]="visibleState">{{rightAnswer}}</p>
+          <ion-list radio-group [(ngModel)]="radioButtons" (ngModulChange)="collectAnswer(value)">
+            <ion-item>
+              <ion-radio hidden value="none"></ion-radio>
+            </ion-item>
+          <!-- randomQuestionList[i].answer["answer" + z] -->
+
+            <ion-item *ngFor="let z of randomAnswerArray">
+              <ion-label>{{randomQuestionList[i].answer["answer" + z]}}</ion-label>
+              <ion-radio [value]="randomQuestionList[i].answer['answer' + z]" name="randomQuestionList[i].answer['answer' + z]"></ion-radio>
+            </ion-item>
+
+            <button id="timeNode" ion-button full round icon-end (click)="checkAnswer()">
+              Next
+            </button>
+            <!--
+            
+            -->
+          </ion-list>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-col>
+          <p>You have got {{marks}} / {{randomQuestionList.length}}</p>
+          <!-- <button ion-button (click)="tryAgain()">Try again?</button> -->
+          <button ion-button (click)="tryAgain()">Try again?</button>
+          <button ion-button (click)="goToHomepage()">Leave</button>
+        </ion-col>
+      </ion-slide>
+    </ion-slides>
+    <ion-footer>
+      
+    </ion-footer>
+  </div>
+  <ng-template #loading>Loading...</ng-template>
+</ion-content>
+
+<!--
+       *ngIf="$event != null; else $event=none" 
+       (ionChange)="collectAnswer($event, i)"
+       randomQuestionList[i].answer["answer" + (randomAnswerArray[z])]
+       [(ngModel)]="radioButtons"
+       [(ngModel)]="autoManufacturers"
+       [(ngModel)]="radioButtons" 
+        value="radioButtons.N"
+        *ngFor="let answer of randomAnswerList" {{answer}}
+      
+      <ion-item *ngFor="let z of randomAnswerArray">
+          <ion-label>{{randomQuestionList[i].answer["answer" + z]}}</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+
+ -->
